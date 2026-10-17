@@ -1,95 +1,100 @@
 # customizelinux
 
-Shareable **Ubuntu GNOME** desktop rice — the top bar, icons, window smoothness, and trackpad gestures — without any personal files.
+**Agent-first** Ubuntu GNOME rice — top bar, icons, smooth windows, trackpad gestures.
 
-Built for friends who see the setup and ask “how do I make mine look like that?”
+Your friend clones the repo, opens it in **Cursor**, and asks the agent to set it up. No long manual checklist required.
 
 | | |
 |---|---|
 | **Target** | Ubuntu **24.04 LTS** · GNOME Shell **46** |
-| **Session** | **X11 / Ubuntu on Xorg** (needed for Touchégg gestures) |
-| **Look** | Orchis Grey Dark · WhiteSur icons · blurred panel · smooth window effects · macOS-style dock |
+| **Session** | **Ubuntu on Xorg** for gestures (Touchégg) |
+| **Look** | Orchis Grey Dark · WhiteSur icons · blur · smooth effects · macOS-style dock |
 
-## What’s included
+No wallpapers, accounts, SSH keys, or other personal files are included.
 
-- **Orchis-Grey-Dark** GTK + Shell theme (installed from upstream)
-- **WhiteSur** icons + a small **WhiteSur-Panel** status overlay (clearer top-bar icons)
-- **Just Perfection** — cleaner top bar (e.g. Activities button off, smoother animations)
-- **Blur my Shell** — frosted panel / overview
-- **Burn My Windows** — soft “macos-smooth” glide close/open
-- **Magic Lamp** — Compiz-style minimize
-- **MacOS Dock** — magnification dock
-- **X11 Gestures + Touchégg** — 3/4-finger trackpad gestures
-- **Pop Shell** — light tiling (optional feel, not forced tile-by-default)
+---
 
-No wallpapers, accounts, SSH keys, browser data, or app secrets are in this repo.
-
-## Quick start
+## For your friend (recommended)
 
 ```bash
 git clone https://github.com/BemnetMussa/customizelinux.git
 cd customizelinux
-chmod +x install.sh
-./install.sh
+cursor .    # or: open this folder in Cursor
 ```
 
-Then install the extensions listed in [`extensions.txt`](extensions.txt) (Extension Manager or [extensions.gnome.org](https://extensions.gnome.org/)), and run:
+Then tell the agent something like:
+
+> **Set up this Linux customization on my PC.**
+
+The agent reads [`AGENTS.md`](AGENTS.md) and runs the install for you.
+
+When it finishes: **log out → login screen gear → Ubuntu on Xorg → log in.**
+
+---
+
+## Manual install (no agent)
 
 ```bash
+git clone https://github.com/BemnetMussa/customizelinux.git
+cd customizelinux
+chmod +x install.sh scripts/install-extensions.sh
+./install.sh
+./scripts/install-extensions.sh
 ./install.sh --settings-only
 ```
 
-Log out → log in with **Ubuntu on Xorg** → enjoy.
-
-### Install modes
+Then log out and use **Ubuntu on Xorg**.
 
 | Command | Does |
 |---------|------|
-| `./install.sh` | Deps + themes + icons + configs + dconf |
+| `./install.sh` | Deps + themes + icons + configs |
+| `./scripts/install-extensions.sh` | Downloads the look-and-feel GNOME extensions |
+| `./install.sh --settings-only` | Re-applies dconf after extensions exist |
 | `./install.sh --themes-only` | Orchis + WhiteSur only |
-| `./install.sh --settings-only` | Re-apply configs after extensions are installed |
+
+---
+
+## What’s included
+
+- **Orchis-Grey-Dark** GTK + Shell theme  
+- **WhiteSur** icons + **WhiteSur-Panel** status overlay  
+- **Just Perfection**, **Blur my Shell**, **Burn My Windows**, **Magic Lamp**  
+- **MacOS Dock**, **X11 Gestures** + Touchégg, **Pop Shell**  
+
+See [`extensions.txt`](extensions.txt) for UUIDs and links.
 
 ## Gestures (X11)
 
 | Fingers | Action |
 |---------|--------|
-| 3-finger swipe | GNOME Shell gestures (overview / workspace — via X11 Gestures) |
-| 4-finger swipe | GNOME Shell gestures |
+| 3 / 4-finger swipe | GNOME Shell gestures |
 | 3-finger pinch in | Close window |
 | 4-finger pinch out | Show desktop |
-| 4-finger pinch in | App grid (`Super+A`) |
+| 4-finger pinch in | App grid |
 | 2 / 3 finger tap | Right / middle click |
 
-Wayland users: switch to **Ubuntu on Xorg** for this gesture stack.
-
-## Layout of this repo
+## Repo layout
 
 ```text
 customizelinux/
-├── install.sh              # main installer
-├── extensions.txt          # extension UUIDs + links
-├── dconf/                  # sanitized gsettings dumps
-├── configs/
-│   ├── burn-my-windows/    # macos-smooth effect profile
-│   └── touchegg/           # trackpad gesture config
-├── icons/WhiteSur-Panel/   # top-bar status icon overlay
-└── screenshots/            # drop your own previews here
+├── AGENTS.md                 # instructions for Cursor / coding agents
+├── .cursor/rules/            # always-on agent rule
+├── install.sh
+├── scripts/install-extensions.sh
+├── extensions.txt
+├── dconf/                    # sanitized settings
+├── configs/                  # burn-my-windows + touchegg
+└── icons/WhiteSur-Panel/
 ```
 
-## Not included (on purpose)
+## Not included
 
-- Personal wallpapers and photo libraries  
-- Monitor geometry / HiDPI text scale (set yours in Settings)  
-- Work/dev extensions (Vitals, NVIDIA util, calendars, Pomodoro, …)  
-- Dotfiles for editors, browsers, terminals, SSH, cloud CLIs  
+Personal wallpapers, HiDPI scale, work/dev extensions, editor/browser/SSH dotfiles.
 
 ## Credits
 
-- [Orchis theme](https://github.com/vinceliuice/Orchis-theme) — vinceliuice  
-- [WhiteSur icons](https://github.com/vinceliuice/WhiteSur-icon-theme) — vinceliuice  
-- Extension authors linked in `extensions.txt`  
-- [Touchégg](https://github.com/JoseExposito/touchegg) — JoseExposito  
+[Orchis](https://github.com/vinceliuice/Orchis-theme) · [WhiteSur icons](https://github.com/vinceliuice/WhiteSur-icon-theme) · authors in `extensions.txt` · [Touchégg](https://github.com/JoseExposito/touchegg)
 
 ## License
 
-MIT for the scripts and configs in this repo. Upstream themes/extensions keep their own licenses.
+MIT for scripts/configs here. Upstream themes and extensions keep their own licenses.

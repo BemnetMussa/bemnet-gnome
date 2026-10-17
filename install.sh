@@ -160,20 +160,16 @@ print_next_steps() {
   cat <<EOF
 
 ────────────────────────────────────────────────────────────
-Themes, icons, and configs are in place.
+Themes, icons, and base configs are in place.
 
-NEXT — install the GNOME Shell extensions (one-time):
-  1. Install "Extension Manager" from App Center / Flatpak, or use
-     https://extensions.gnome.org/ with the browser connector.
-  2. Install everything listed in:  extensions.txt
-  3. Re-run:  ./install.sh --settings-only
-     (applies blur / dock / gesture / burn-my-windows settings)
-  4. Log out and back in (use "Ubuntu on Xorg" for gestures).
+NEXT (agent or human):
+  1. ./scripts/install-extensions.sh
+  2. ./install.sh --settings-only
+  3. Log out → login gear → Ubuntu on Xorg → log in
 
-Optional:
-  - Pick any wallpaper you like (none is shipped — keep it personal).
-  - Tweaks → Appearance if you want to fine-tune.
+If an agent is driving setup, it should run steps 1–2 now.
 
+Optional: pick your own wallpaper (none is shipped).
 Repo: https://github.com/BemnetMussa/customizelinux
 ────────────────────────────────────────────────────────────
 EOF
@@ -210,6 +206,11 @@ main() {
       install_orchis
       install_whitesur_icons
       install_extension_configs
+      # Extensions before final dconf so schemas exist when possible
+      if [[ -x "$ROOT/scripts/install-extensions.sh" ]]; then
+        log "Installing GNOME Shell extensions"
+        "$ROOT/scripts/install-extensions.sh" || warn "Some extensions failed — see extensions.txt"
+      fi
       apply_dconf
       enable_extensions
       print_next_steps
