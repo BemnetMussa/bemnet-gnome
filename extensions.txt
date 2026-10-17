@@ -1,0 +1,16 @@
+# Look & feel extensions for Ubuntu 24.04 / GNOME 46
+# Format: uuid | name | install hint
+#
+# Install via Extension Manager (recommended) or browser:
+#   https://extensions.gnome.org/
+# Match your GNOME Shell version (46 on Ubuntu 24.04).
+
+user-theme@gnome-shell-extensions.gcampax.github.com | User Themes | bundled with gnome-shell-extensions package, or e.g.o
+just-perfection-desktop@just-perfection | Just Perfection | https://extensions.gnome.org/extension/3843/just-perfection/
+blur-my-shell@aunetx | Blur my Shell | https://extensions.gnome.org/extension/3193/blur-my-shell/
+burn-my-windows@schneegans.github.com | Burn My Windows | https://extensions.gnome.org/extension/4679/burn-my-windows/
+x11gestures@joseexposito.github.io | X11 Gestures | https://extensions.gnome.org/extension/4033/x11-gestures/
+macos-dock@vinnytherobot.github.io | MacOS Dock | https://extensions.gnome.org/extension/7961/macos-dock/
+compiz-alike-magic-lamp-effect@hermes83.github.com | Magic Lamp | https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
+pop-shell@system76.com | Pop Shell | apt: gnome-shell-extension-pop-shell (or System76)
+ubuntu-appindicators@ubuntu.com | Ubuntu AppIndicators | preinstalled on Ubuntu

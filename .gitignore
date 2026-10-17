@@ -1,0 +1,11 @@
+# Local / personal — never commit
+*.log
+.DS_Store
+cache/
+.tmp/
+build/
+*.bak
+*~
+.env
+secrets/
+screenshots/private/

@@ -1,0 +1,17 @@
+[Icon Theme]
+Name=WhiteSur-Panel
+Comment=WhiteSur apps + clear panel status icons (charging/low colors)
+Inherits=WhiteSur,hicolor
+Directories=status/symbolic,status/22
+
+[status/symbolic]
+Context=Status
+Size=16
+Type=Scalable
+MinSize=8
+MaxSize=256
+
+[status/22]
+Context=Status
+Size=22
+Type=Fixed

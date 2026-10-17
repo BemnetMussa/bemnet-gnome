@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <!-- battery shell -->
+  <rect x="3" y="7" width="16.4" height="10" rx="2.4" fill="none" stroke="#F5F5F5" stroke-width="2.4"/>
+  <path d="M20 10.2 v3.6 c1.35 0 2.3-.9 2.3-1.8 s-.95-1.8-2.3-1.8z" fill="#F5F5F5"/>
+  
+  <rect x="4.6" y="8.6" width="5.30" height="6.8" rx="1.2" fill="#F5F5F5"/>
+  
+</svg>
