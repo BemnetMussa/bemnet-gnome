@@ -1,29 +1,25 @@
-# Agent instructions — customizelinux
+# Agent instructions — bemnet-gnome
 
-You are setting up **Bemnet’s Ubuntu GNOME desktop rice** on the user’s machine.
+Apply this Ubuntu GNOME desktop customization on the user’s machine.
 
-This repo is **agent-first**: the human clones it, opens it in Cursor (or another coding agent), and asks you to make their Linux look like this. You run the install — they should not have to read a long README.
+**Agent-first:** when they ask to install, set up, or apply this look — run the installer. Do not only explain unless they ask for explanation only.
 
-## Mission
+## Target
 
-When the user wants this look (any of: “set this up”, “install”, “make my PC look like this”, “apply the rice”, or just opened the repo and asked for help), **execute the full setup**. Do not only explain the steps unless they explicitly ask for an explanation-only answer.
+- Ubuntu **24.04** · GNOME Shell **46**
+- Gestures need **Ubuntu on Xorg**. If they are on Wayland, still install; warn that gestures need Xorg after logout.
 
-## Target environment
+## Rules
 
-- Ubuntu **24.04** (Noble) · GNOME Shell **46**
-- Gestures need **X11** (“Ubuntu on Xorg”). Warn if they are on Wayland; still install everything else.
+1. Use `./install.sh` and `./scripts/install-extensions.sh` — do not invent another theme stack.
+2. Only change look-and-feel from this repo. Do not touch unrelated dotfiles, credentials, or other apps.
+3. Scripts may need `sudo`. If elevation fails, give the exact command to run in a terminal.
+4. Do not commit or push unless asked.
+5. After success, keep the wrap-up short: log out → **Ubuntu on Xorg** → log in.
 
-## Hard rules
+## Steps
 
-1. **Stay inside this repo’s workflow.** Prefer `./install.sh` and `./scripts/install-extensions.sh`. Do not invent a different theme stack.
-2. **No personal data.** Never copy wallpapers, SSH keys, browser profiles, `.env`, email, or other home-directory secrets. This rice ships look-and-feel only.
-3. **Ask before `sudo` only if the tool cannot elevate** — otherwise run the install scripts; they already call sudo where needed. If sudo fails, tell the user the exact command to re-run in a terminal.
-4. **Do not commit or push** unless the user asks.
-5. After success, give a **short** “what to do next” (log out → Ubuntu on Xorg). No essay.
-
-## Procedure (run in order)
-
-Work from the repo root (`customizelinux/`).
+From the repo root:
 
 ### 1. Preflight
 
@@ -33,48 +29,42 @@ gnome-shell --version 2>/dev/null || true
 lsb_release -ds 2>/dev/null || true
 ```
 
-If not Ubuntu/GNOME, warn and stop or adapt carefully. If Wayland, note that trackpad gestures need Xorg later.
+Stop or adapt carefully if this is not Ubuntu GNOME.
 
-### 2. Full install
+### 2. Install
 
 ```bash
 chmod +x install.sh scripts/install-extensions.sh
 ./install.sh
 ```
 
-This installs deps, Orchis, WhiteSur, Touchégg configs, downloads extensions, applies dconf, and enables what it can. Needs network + sudo. Fix errors and retry — do not skip.
+Needs network and sudo. Fix failures and retry.
 
-### 3. If extensions partially failed
+### 3. If extensions failed
 
 ```bash
 ./scripts/install-extensions.sh
 ./install.sh --settings-only
 ```
 
-Use `extensions.txt` + Extension Manager only for UUIDs that still fail.
+Use `extensions.txt` / Extension Manager only for what still fails.
 
-### 4. Finish message to the user
+### 4. Tell the user
 
-Tell them:
+1. Log out.  
+2. Login screen → gear → **Ubuntu on Xorg** (for gestures).  
+3. Log back in.
 
-1. Log out.
-2. On the login screen, choose **Ubuntu on Xorg** (gear icon) if they want trackpad gestures.
-3. Log back in — panel blur, dock, window effects, and gestures should match.
-
-Optional: they can pick any wallpaper themselves (none is shipped).
-
-## If the user only wants themes
+## Themes only
 
 ```bash
 ./install.sh --themes-only
 ```
 
-## If something already partially installed
+## Re-run
 
-Re-run `./install.sh --settings-only` and `./scripts/install-extensions.sh`. Safe to re-run; scripts are mostly idempotent.
+`./install.sh --settings-only` and `./scripts/install-extensions.sh` are safe to repeat.
 
 ## Out of scope
 
-- Installing Cursor/VS Code themes, terminal themes, neovim, or unrelated dotfiles
-- Changing their wallpaper or monitors
-- Adding personal/work extensions from the author’s own PC
+Editor/terminal themes, wallpapers, monitors, or unrelated system config.

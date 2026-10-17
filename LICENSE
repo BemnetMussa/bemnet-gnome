@@ -20,6 +20,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-NOTE: Third-party themes and icons (Orchis, WhiteSur, GNOME extensions)
-remain under their upstream licenses. This repository only ships install
-scripts, configuration dumps, and a small WhiteSur-Panel icon overlay.
+Third-party themes, icons, and GNOME extensions remain under their upstream licenses.

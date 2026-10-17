@@ -5,7 +5,7 @@ set -euo pipefail
 
 SHELL_MAJOR="$(gnome-shell --version 2>/dev/null | awk '{print $3}' | cut -d. -f1 || echo 46)"
 EXT_DIR="${HOME}/.local/share/gnome-shell/extensions"
-ZIP_DIR="${HOME}/.cache/customizelinux/ext-zips"
+ZIP_DIR="${HOME}/.cache/bemnet-gnome/ext-zips"
 mkdir -p "$EXT_DIR" "$ZIP_DIR"
 
 # uuid|extensions.gnome.org pk

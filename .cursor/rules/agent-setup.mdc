@@ -1,23 +1,21 @@
 ---
-description: Agent-first setup for this Ubuntu GNOME rice — run install, don’t just document
+description: Apply bemnet-gnome Ubuntu setup — run install, don’t only document
 alwaysApply: true
 ---
 
-# customizelinux — agent setup
+# bemnet-gnome — agent setup
 
-This repo’s purpose is to apply a GNOME desktop look. When the user wants it installed, **run the setup** (see root `AGENTS.md`). Do not stop at explaining unless they ask.
+When the user wants this desktop look installed, **run the setup** (see `AGENTS.md`). Do not stop at explaining unless they ask.
 
 ## Default action
 
-From repo root:
-
 1. `chmod +x install.sh scripts/install-extensions.sh`
-2. `./install.sh` (pulls themes, extensions, and settings)
-3. If anything failed: `./scripts/install-extensions.sh` then `./install.sh --settings-only`
-4. Tell them to log out and use **Ubuntu on Xorg** for gestures
+2. `./install.sh`
+3. On failure: `./scripts/install-extensions.sh` then `./install.sh --settings-only`
+4. Tell them: log out → **Ubuntu on Xorg** → log in
 
 ## Guardrails
 
-- Look-and-feel only — no personal files, wallpapers from their Downloads, SSH keys, or secrets
 - Prefer the shipped scripts over ad-hoc theme installs
-- Ubuntu 24.04 / GNOME 46 is the tested target
+- Only apply this repo’s look-and-feel stack
+- Target: Ubuntu 24.04 / GNOME 46

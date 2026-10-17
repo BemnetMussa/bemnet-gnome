@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# customizelinux — apply Bemnet's Ubuntu GNOME look (themes, blur, gestures, dock)
-# Tested target: Ubuntu 24.04 LTS · GNOME Shell 46 · X11 session (for trackpad gestures)
+# bemnet-gnome — Ubuntu GNOME desktop customization
+# Target: Ubuntu 24.04 LTS · GNOME Shell 46 · X11 (for trackpad gestures)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/customizelinux"
+CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/bemnet-gnome"
 mkdir -p "$CACHE"
 
 log()  { printf '\n==> %s\n' "$*"; }
@@ -21,7 +21,7 @@ check_env() {
   if command -v gnome-shell >/dev/null 2>&1; then
     gnome-shell --version
   else
-    warn "gnome-shell not found — this rice is for GNOME on Ubuntu."
+    warn "gnome-shell not found — this setup targets GNOME on Ubuntu."
   fi
   if [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]; then
     warn "You are on Wayland. X11 Gestures + Touchégg need an X11 session."
@@ -160,17 +160,15 @@ print_next_steps() {
   cat <<EOF
 
 ────────────────────────────────────────────────────────────
-Themes, icons, and base configs are in place.
+Install finished.
 
-NEXT (agent or human):
-  1. ./scripts/install-extensions.sh
-  2. ./install.sh --settings-only
-  3. Log out → login gear → Ubuntu on Xorg → log in
+If extensions were incomplete:
+  ./scripts/install-extensions.sh
+  ./install.sh --settings-only
 
-If an agent is driving setup, it should run steps 1–2 now.
+Then: log out → login gear → Ubuntu on Xorg → log in
 
-Optional: pick your own wallpaper (none is shipped).
-Repo: https://github.com/BemnetMussa/customizelinux
+https://github.com/BemnetMussa/bemnet-gnome
 ────────────────────────────────────────────────────────────
 EOF
 }

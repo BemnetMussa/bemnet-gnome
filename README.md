@@ -1,100 +1,92 @@
-# customizelinux
+# bemnet-gnome
 
-**Agent-first** Ubuntu GNOME rice — top bar, icons, smooth windows, trackpad gestures.
-
-Your friend clones the repo, opens it in **Cursor**, and asks the agent to set it up. No long manual checklist required.
+Ubuntu GNOME desktop setup: Orchis Grey Dark theme, WhiteSur icons, blurred top bar, smooth window effects, magnification dock, and trackpad gestures.
 
 | | |
 |---|---|
-| **Target** | Ubuntu **24.04 LTS** · GNOME Shell **46** |
-| **Session** | **Ubuntu on Xorg** for gestures (Touchégg) |
-| **Look** | Orchis Grey Dark · WhiteSur icons · blur · smooth effects · macOS-style dock |
-
-No wallpapers, accounts, SSH keys, or other personal files are included.
+| **OS** | Ubuntu 24.04 LTS |
+| **Shell** | GNOME 46 |
+| **Session** | Ubuntu on Xorg (required for gestures) |
 
 ---
 
-## For your friend (recommended)
+## Install with an agent (recommended)
 
 ```bash
-git clone https://github.com/BemnetMussa/customizelinux.git
-cd customizelinux
-cursor .    # or: open this folder in Cursor
+git clone https://github.com/BemnetMussa/bemnet-gnome.git
+cd bemnet-gnome
+cursor .
 ```
 
-Then tell the agent something like:
+Ask the agent:
 
-> **Set up this Linux customization on my PC.**
+> Set up this Ubuntu GNOME customization.
 
-The agent reads [`AGENTS.md`](AGENTS.md) and runs the install for you.
+It follows [`AGENTS.md`](AGENTS.md) and runs the installer.
 
-When it finishes: **log out → login screen gear → Ubuntu on Xorg → log in.**
+When finished: log out → gear on the login screen → **Ubuntu on Xorg** → log in.
 
 ---
 
-## Manual install (no agent)
+## Manual install
 
 ```bash
-git clone https://github.com/BemnetMussa/customizelinux.git
-cd customizelinux
+git clone https://github.com/BemnetMussa/bemnet-gnome.git
+cd bemnet-gnome
 chmod +x install.sh scripts/install-extensions.sh
 ./install.sh
-./scripts/install-extensions.sh
-./install.sh --settings-only
 ```
 
-Then log out and use **Ubuntu on Xorg**.
-
-| Command | Does |
-|---------|------|
-| `./install.sh` | Deps + themes + icons + configs |
-| `./scripts/install-extensions.sh` | Downloads the look-and-feel GNOME extensions |
-| `./install.sh --settings-only` | Re-applies dconf after extensions exist |
-| `./install.sh --themes-only` | Orchis + WhiteSur only |
+| Command | Purpose |
+|---------|---------|
+| `./install.sh` | Dependencies, themes, icons, extensions, settings |
+| `./install.sh --settings-only` | Re-apply settings after fixing extensions |
+| `./install.sh --themes-only` | Themes and icons only |
+| `./scripts/install-extensions.sh` | Extensions only |
 
 ---
 
-## What’s included
+## What you get
 
-- **Orchis-Grey-Dark** GTK + Shell theme  
-- **WhiteSur** icons + **WhiteSur-Panel** status overlay  
-- **Just Perfection**, **Blur my Shell**, **Burn My Windows**, **Magic Lamp**  
-- **MacOS Dock**, **X11 Gestures** + Touchégg, **Pop Shell**  
+- **Orchis-Grey-Dark** — GTK and GNOME Shell theme  
+- **WhiteSur** icons with a clearer panel status overlay  
+- **Just Perfection** — cleaner top bar  
+- **Blur my Shell** — frosted panel and overview  
+- **Burn My Windows** — smooth glide open/close  
+- **Magic Lamp** — Compiz-style minimize  
+- **MacOS Dock** — magnification dock  
+- **X11 Gestures + Touchégg** — 3/4-finger trackpad gestures  
+- **Pop Shell** — optional tiling (off by default)  
 
-See [`extensions.txt`](extensions.txt) for UUIDs and links.
+Extension list: [`extensions.txt`](extensions.txt)
 
-## Gestures (X11)
+## Gestures
 
-| Fingers | Action |
+| Gesture | Action |
 |---------|--------|
 | 3 / 4-finger swipe | GNOME Shell gestures |
 | 3-finger pinch in | Close window |
 | 4-finger pinch out | Show desktop |
 | 4-finger pinch in | App grid |
-| 2 / 3 finger tap | Right / middle click |
+| 2 / 3-finger tap | Right / middle click |
 
-## Repo layout
+## Layout
 
 ```text
-customizelinux/
-├── AGENTS.md                 # instructions for Cursor / coding agents
-├── .cursor/rules/            # always-on agent rule
+bemnet-gnome/
+├── AGENTS.md
 ├── install.sh
 ├── scripts/install-extensions.sh
 ├── extensions.txt
-├── dconf/                    # sanitized settings
-├── configs/                  # burn-my-windows + touchegg
+├── dconf/
+├── configs/
 └── icons/WhiteSur-Panel/
 ```
 
-## Not included
-
-Personal wallpapers, HiDPI scale, work/dev extensions, editor/browser/SSH dotfiles.
-
 ## Credits
 
-[Orchis](https://github.com/vinceliuice/Orchis-theme) · [WhiteSur icons](https://github.com/vinceliuice/WhiteSur-icon-theme) · authors in `extensions.txt` · [Touchégg](https://github.com/JoseExposito/touchegg)
+[Orchis](https://github.com/vinceliuice/Orchis-theme) · [WhiteSur icons](https://github.com/vinceliuice/WhiteSur-icon-theme) · [Touchégg](https://github.com/JoseExposito/touchegg) · extension authors in `extensions.txt`
 
 ## License
 
-MIT for scripts/configs here. Upstream themes and extensions keep their own licenses.
+MIT for scripts and configs in this repo. Upstream themes and extensions keep their own licenses.
