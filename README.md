@@ -18,11 +18,11 @@ cd bemnet-gnome
 cursor .
 ```
 
-Ask the agent:
+Ask the agent (copy-paste):
 
-> Set up this Ubuntu GNOME customization.
+> Set up this Ubuntu GNOME customization. Follow AGENTS.md and run the installer now — including extensions, CopyQ, Pomodoro, and scale adaptation. Do not only explain.
 
-It follows [`AGENTS.md`](AGENTS.md) and runs the installer.
+The agent reads [`AGENTS.md`](AGENTS.md) + `.cursor/rules/agent-setup.mdc` and runs `./install.sh` (sudo + network).
 
 When finished: log out → gear on the login screen → **Ubuntu on Xorg** → log in.
 
@@ -33,16 +33,17 @@ When finished: log out → gear on the login screen → **Ubuntu on Xorg** → l
 ```bash
 git clone https://github.com/BemnetMussa/bemnet-gnome.git
 cd bemnet-gnome
-chmod +x install.sh scripts/install-extensions.sh
+chmod +x install.sh scripts/install-extensions.sh scripts/adapt-to-scale.sh
 ./install.sh
 ```
 
 | Command | Purpose |
 |---------|---------|
-| `./install.sh` | Dependencies, themes, icons, extensions, settings |
-| `./install.sh --settings-only` | Re-apply settings after fixing extensions |
+| `./install.sh` | Dependencies, themes, icons, extensions, settings + scale adapt |
+| `./install.sh --settings-only` | Re-apply settings + scale adapt (after fixing extensions) |
 | `./install.sh --themes-only` | Themes and icons only |
 | `./scripts/install-extensions.sh` | Extensions only |
+| `./scripts/adapt-to-scale.sh` | Re-fit dock/panel to this monitor (keeps your scale) |
 
 ---
 

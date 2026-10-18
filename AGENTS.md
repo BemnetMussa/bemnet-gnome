@@ -2,7 +2,7 @@
 
 Apply this Ubuntu GNOME desktop customization on the user’s machine.
 
-**Agent-first:** when they ask to install, set up, or apply this look — run the installer. Do not only explain unless they ask for explanation only.
+**Agent-first:** if they ask to install, set up, apply, rice, or “make it look like this” — **run the installer immediately**. Do not only explain unless they ask for explanation only.
 
 ## Target
 
@@ -13,9 +13,10 @@ Apply this Ubuntu GNOME desktop customization on the user’s machine.
 
 1. Use `./install.sh` and `./scripts/install-extensions.sh` — do not invent another theme stack.
 2. Only change look-and-feel from this repo. Do not touch unrelated dotfiles, credentials, or other apps.
-3. Scripts may need `sudo`. If elevation fails, give the exact command to run in a terminal.
-4. Do not commit or push unless asked.
-5. After success, keep the wrap-up short: log out → **Ubuntu on Xorg** → log in.
+3. Scripts may need `sudo`. If elevation fails, give the exact command to run in a terminal, then continue after they run it.
+4. Do **not** change the user’s display scale or `text-scaling-factor`. Sizing is handled by `scripts/adapt-to-scale.sh`.
+5. Do not commit or push unless asked.
+6. After success, keep the wrap-up short: log out → **Ubuntu on Xorg** → log in.
 
 ## Steps
 
@@ -31,14 +32,16 @@ lsb_release -ds 2>/dev/null || true
 
 Stop or adapt carefully if this is not Ubuntu GNOME.
 
-### 2. Install
+### 2. Install (required)
 
 ```bash
-chmod +x install.sh scripts/install-extensions.sh
+chmod +x install.sh scripts/install-extensions.sh scripts/adapt-to-scale.sh
 ./install.sh
 ```
 
 Needs network and sudo. Fix failures and retry.
+
+This installs themes, icons, extensions (including Vitals + EthCal), CopyQ, Pomodoro, dconf settings, **and** runs scale adaptation automatically.
 
 ### 3. If extensions failed
 
@@ -49,11 +52,21 @@ Needs network and sudo. Fix failures and retry.
 
 Use `extensions.txt` / Extension Manager only for what still fails.
 
-### 4. Tell the user
+### 4. If UI looks cramped / overlapping on their monitor
+
+```bash
+./scripts/adapt-to-scale.sh
+```
+
+Safe to re-run. Does not change their scale — only dock/panel/vitals pixel sizes.
+
+### 5. Tell the user
 
 1. Log out.  
 2. Login screen → gear → **Ubuntu on Xorg** (for gestures).  
 3. Log back in.
+
+Shortcuts to mention if useful: **Ctrl+Alt+A/D** workspaces, **Ctrl+Shift+C** CopyQ, **Ctrl+Alt+P** Pomodoro.
 
 ## Themes only
 
@@ -63,23 +76,21 @@ Use `extensions.txt` / Extension Manager only for what still fails.
 
 ## Re-run
 
-`./install.sh --settings-only` and `./scripts/install-extensions.sh` are safe to repeat.
+`./install.sh --settings-only`, `./scripts/install-extensions.sh`, and `./scripts/adapt-to-scale.sh` are safe to repeat.
 
 ## Out of scope
 
 Editor/terminal themes, wallpapers, monitors, or unrelated system config.
 
-## Included top bar extras
+## Included stack (expect these after install)
 
-- **Vitals** (`Vitals@CoreCoding.com`) — live CPU/RAM/GPU/network/temps  
-- **EthCal** (`eth-cal@dagimg-dot`) — Ethiopian calendar (GitHub zip, not e.g.o)  
-- **Pomodoro** (`pomodoro@arun.codito.in`) — apt `gnome-shell-pomodoro`  
-- Workspace shortcuts: `Ctrl+Alt+A/D` (see `dconf/03-keybindings.ini`)
-
-## Included apps
-
-- **CopyQ** — clipboard manager (`apt install copyq`); config in `configs/copyq/`, autostart in `configs/autostart/`. Do **not** ship clipboard history `.dat` files.
-
-## Scale
-
-After dconf apply, always run `scripts/adapt-to-scale.sh`. It must **not** change the user’s display scale or `text-scaling-factor` — only dock/panel/vitals pixel sizes so the rice fits any monitor.
+- **Orchis-Grey-Dark** + **WhiteSur-Panel** icons  
+- **Just Perfection**, **Blur my Shell**, **Burn My Windows**, **Magic Lamp**  
+- **MacOS Dock** (auto-hide)  
+- **Vitals** — CPU/RAM/GPU/network/temps  
+- **EthCal** — Ethiopian calendar (GitHub zip, not e.g.o)  
+- **Pomodoro** — apt `gnome-shell-pomodoro`  
+- **CopyQ** — clipboard history + autostart (never copy `.dat` history files)  
+- **X11 Gestures + Touchégg**, **Pop Shell** (tiling off by default)  
+- Workspace shortcuts: `Ctrl+Alt+A/D` (`dconf/03-keybindings.ini`)  
+- **Scale-adaptive** dock/panel sizing via `scripts/adapt-to-scale.sh`

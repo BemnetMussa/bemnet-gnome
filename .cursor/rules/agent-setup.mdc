@@ -5,17 +5,43 @@ alwaysApply: true
 
 # bemnet-gnome — agent setup
 
-When the user wants this desktop look installed, **run the setup** (see `AGENTS.md`). Do not stop at explaining unless they ask.
+When the user wants this desktop look installed, set up, applied, or “made like the README” — **run the setup now**. Do not stop at explaining unless they only asked for an explanation.
 
-## Default action
+Follow `AGENTS.md` as the source of truth.
 
-1. `chmod +x install.sh scripts/install-extensions.sh`
-2. `./install.sh`
-3. On failure: `./scripts/install-extensions.sh` then `./install.sh --settings-only`
-4. Tell them: log out → **Ubuntu on Xorg** → log in
+## Default action (do this)
 
-## Guardrails
+```bash
+chmod +x install.sh scripts/install-extensions.sh scripts/adapt-to-scale.sh
+./install.sh
+```
 
-- Prefer the shipped scripts over ad-hoc theme installs
-- Only apply this repo’s look-and-feel stack
-- Target: Ubuntu 24.04 / GNOME 46
+Needs network + sudo. If sudo fails, give them the exact command to paste in a terminal, then continue.
+
+## On failure / partial install
+
+```bash
+./scripts/install-extensions.sh
+./install.sh --settings-only
+```
+
+`./install.sh` already runs `scripts/adapt-to-scale.sh` after settings. If dock/panel looks cramped on their monitor, run:
+
+```bash
+./scripts/adapt-to-scale.sh
+```
+
+## Never do
+
+- Do **not** invent another theme/dock stack
+- Do **not** change their display scale or `text-scaling-factor`
+- Do **not** ship or copy CopyQ clipboard history `.dat` files
+- Do **not** commit/push unless they ask
+
+## After success (short)
+
+1. Log out  
+2. Login gear → **Ubuntu on Xorg** (gestures need X11)  
+3. Log back in  
+
+Confirm briefly: Orchis + WhiteSur, blur top bar, Vitals, EthCal, auto-hide dock, CopyQ, Pomodoro, workspace shortcuts Ctrl+Alt+A/D, scale-adapted sizes.
