@@ -68,3 +68,14 @@ Use `extensions.txt` / Extension Manager only for what still fails.
 ## Out of scope
 
 Editor/terminal themes, wallpapers, monitors, or unrelated system config.
+
+## Included top bar extras
+
+- **Vitals** (`Vitals@CoreCoding.com`) — live CPU/RAM/GPU/network/temps  
+- **EthCal** (`eth-cal@dagimg-dot`) — Ethiopian calendar (GitHub zip, not e.g.o)  
+- **Pomodoro** (`pomodoro@arun.codito.in`) — apt `gnome-shell-pomodoro`  
+- Workspace shortcuts: `Ctrl+Alt+A/D` (see `dconf/03-keybindings.ini`)
+
+## Included apps
+
+- **CopyQ** — clipboard manager (`apt install copyq`); config in `configs/copyq/`, autostart in `configs/autostart/`. Do **not** ship clipboard history `.dat` files.

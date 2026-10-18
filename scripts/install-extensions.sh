@@ -17,6 +17,13 @@ EXTENSIONS=(
   "x11gestures@joseexposito.github.io|4033"
   "macos-dock@vinnytherobot.github.io|7961"
   "compiz-alike-magic-lamp-effect@hermes83.github.com|3740"
+  "Vitals@CoreCoding.com|1460"
+)
+
+# Not on extensions.gnome.org — install from GitHub release zip
+# uuid|direct zip URL
+GITHUB_EXTENSIONS=(
+  "eth-cal@dagimg-dot|https://github.com/dagimg-dot/EthCal/releases/download/v1.3.1/eth-cal%40dagimg-dot.shell-extension-v1.3.1.zip"
 )
 
 need() { command -v "$1" >/dev/null 2>&1 || { echo "Missing: $1"; exit 1; }; }
@@ -106,6 +113,44 @@ install_one() {
   echo "  installed: $uuid (v${version})"
 }
 
+install_github_zip() {
+  local uuid="$1" url="$2"
+  local dest="${EXT_DIR}/${uuid}"
+
+  if [[ -d "$dest" ]]; then
+    echo "  already present: $uuid"
+    return 0
+  fi
+
+  echo "  fetching (GitHub): $uuid"
+  local zipfile="${ZIP_DIR}/${uuid//@/_}-github.zip"
+  if ! curl -fsSL -o "$zipfile" "$url" || [[ ! -s "$zipfile" ]]; then
+    echo "  !! download failed: $uuid"
+    rm -f "$zipfile"
+    return 1
+  fi
+
+  local tmp
+  tmp="$(mktemp -d)"
+  unzip -qo "$zipfile" -d "$tmp"
+  if [[ ! -f "$tmp/metadata.json" ]]; then
+    echo "  !! bad zip: $uuid"
+    rm -rf "$tmp"
+    return 1
+  fi
+
+  rm -rf "$dest"
+  mkdir -p "$dest"
+  cp -a "$tmp"/. "$dest"/
+  rm -rf "$tmp"
+
+  if [[ -d "$dest/schemas" ]]; then
+    glib-compile-schemas "$dest/schemas" 2>/dev/null || true
+  fi
+
+  echo "  installed: $uuid (GitHub)"
+}
+
 echo "==> GNOME extensions for shell ${SHELL_MAJOR}"
 
 if command -v apt-get >/dev/null 2>&1; then
@@ -118,6 +163,12 @@ for entry in "${EXTENSIONS[@]}"; do
   uuid="${entry%%|*}"
   pk="${entry##*|}"
   install_one "$uuid" "$pk" || failed=$((failed + 1))
+done
+
+for entry in "${GITHUB_EXTENSIONS[@]}"; do
+  uuid="${entry%%|*}"
+  url="${entry##*|}"
+  install_github_zip "$uuid" "$url" || failed=$((failed + 1))
 done
 
 echo

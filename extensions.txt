@@ -14,3 +14,9 @@ macos-dock@vinnytherobot.github.io | MacOS Dock | https://extensions.gnome.org/e
 compiz-alike-magic-lamp-effect@hermes83.github.com | Magic Lamp | https://extensions.gnome.org/extension/3740/compiz-alike-magic-lamp-effect/
 pop-shell@system76.com | Pop Shell | apt: gnome-shell-extension-pop-shell (or System76)
 ubuntu-appindicators@ubuntu.com | Ubuntu AppIndicators | preinstalled on Ubuntu
+Vitals@CoreCoding.com | Vitals | https://extensions.gnome.org/extension/1460/vitals/
+eth-cal@dagimg-dot | EthCal (Ethiopian calendar) | GitHub release: https://github.com/dagimg-dot/EthCal/releases
+pomodoro@arun.codito.in | Pomodoro | apt: gnome-shell-pomodoro (https://gnomepomodoro.org)
+
+# Apps (not GNOME extensions) installed by install.sh:
+#   copyq + copyq-plugins — clipboard history (Ctrl+Shift+C to show)

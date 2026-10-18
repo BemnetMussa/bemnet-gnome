@@ -36,11 +36,19 @@ install_apt_deps() {
     git curl unzip dconf-cli gnome-tweaks \
     gnome-shell-extensions \
     gnome-shell-extension-prefs \
-    chrome-gnome-shell 2>/dev/null || true
+    chrome-gnome-shell \
+    copyq copyq-plugins \
+    gnome-shell-pomodoro 2>/dev/null || true
 
   # Pop Shell (tiling) — ignore if unavailable
   sudo apt-get install -y gnome-shell-extension-pop-shell 2>/dev/null || \
     warn "pop-shell package not found; install the extension manually later."
+
+  # Ensure CopyQ / Pomodoro packages if the bulk install skipped some
+  sudo apt-get install -y copyq copyq-plugins 2>/dev/null || \
+    warn "CopyQ not installed — clipboard history needs: sudo apt install copyq"
+  sudo apt-get install -y gnome-shell-pomodoro 2>/dev/null || \
+    warn "Pomodoro not installed — needs: sudo apt install gnome-shell-pomodoro"
 
   # Touchégg (gesture engine for X11)
   if ! command -v touchegg >/dev/null 2>&1; then
@@ -86,13 +94,23 @@ install_whitesur_icons() {
 }
 
 install_extension_configs() {
-  log "Installing Burn My Windows profile + Touchégg config"
+  log "Installing Burn My Windows profile + Touchégg + CopyQ + autostart"
   mkdir -p "$HOME/.config/burn-my-windows/profiles"
   cp -f "$ROOT/configs/burn-my-windows/profiles/macos-smooth.conf" \
     "$HOME/.config/burn-my-windows/profiles/"
 
   mkdir -p "$HOME/.config/touchegg"
   cp -f "$ROOT/configs/touchegg/touchegg.conf" "$HOME/.config/touchegg/touchegg.conf"
+
+  # CopyQ settings only (no clipboard history dump)
+  mkdir -p "$HOME/.config/copyq"
+  cp -f "$ROOT/configs/copyq/copyq.conf" "$HOME/.config/copyq/copyq.conf"
+  if [[ -f "$ROOT/configs/copyq/copyq-commands.ini" ]]; then
+    cp -f "$ROOT/configs/copyq/copyq-commands.ini" "$HOME/.config/copyq/copyq-commands.ini"
+  fi
+
+  mkdir -p "$HOME/.config/autostart"
+  cp -f "$ROOT/configs/autostart/copyq.desktop" "$HOME/.config/autostart/copyq.desktop"
 }
 
 apply_dconf() {
@@ -101,6 +119,7 @@ apply_dconf() {
   dconf load /org/gnome/desktop/interface/ < "$ROOT/dconf/00-interface.ini"
   dconf load /org/gnome/desktop/wm/preferences/ < "$ROOT/dconf/01-wm.ini"
   dconf load /org/gnome/mutter/ < "$ROOT/dconf/02-mutter.ini"
+  dconf load /org/gnome/desktop/wm/keybindings/ < "$ROOT/dconf/03-keybindings.ini"
 
   # Extension keys only apply after the extension is installed
   load_if_dir() {
@@ -128,6 +147,11 @@ apply_dconf() {
   load_if_dir /org/gnome/shell/extensions/user-theme/ 15-user-theme.ini
   load_if_dir /org/gnome/shell/extensions/ncom/github/hermes83/compiz-alike-magic-lamp-effect/ 16-magic-lamp.ini
   load_if_dir /org/gnome/shell/extensions/pop-shell/ 17-pop-shell.ini
+  load_if_dir /org/gnome/shell/extensions/vitals/ 18-vitals.ini
+  load_if_dir /org/gnome/shell/extensions/ethcal/ 19-ethcal.ini
+  load_if_dir /org/gnome/pomodoro/preferences/ 20-pomodoro.ini
+  load_if_dir /org/gnome/pomodoro/plugins/gnome/ 21-pomodoro-gnome.ini
+  load_if_dir /org/gnome/pomodoro/plugins/sounds/ 22-pomodoro-sounds.ini
 }
 
 enable_extensions() {
@@ -142,6 +166,9 @@ enable_extensions() {
     compiz-alike-magic-lamp-effect@hermes83.github.com
     pop-shell@system76.com
     ubuntu-appindicators@ubuntu.com
+    Vitals@CoreCoding.com
+    eth-cal@dagimg-dot
+    pomodoro@arun.codito.in
   )
   if ! command -v gnome-extensions >/dev/null 2>&1; then
     warn "gnome-extensions CLI missing — enable them in Extension Manager after install."
