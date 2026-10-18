@@ -61,6 +61,7 @@ chmod +x install.sh scripts/install-extensions.sh
 - **Pop Shell** — optional tiling (off by default)  
 - **CopyQ** — clipboard history (autostarts with the session)  
 - **Pomodoro** — focus timer in the top bar  
+- **Scale-adaptive sizing** — keeps *your* display/text scale; resizes dock/panel so it does not overlap or look cramped on another monitor  
 
 Extension list: [`extensions.txt`](extensions.txt)
 
@@ -91,6 +92,7 @@ bemnet-gnome/
 ├── AGENTS.md
 ├── install.sh
 ├── scripts/install-extensions.sh
+├── scripts/adapt-to-scale.sh
 ├── extensions.txt
 ├── dconf/          # themes, dock, vitals, ethcal, shortcuts, …
 ├── configs/

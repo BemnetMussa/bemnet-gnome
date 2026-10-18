@@ -79,3 +79,7 @@ Editor/terminal themes, wallpapers, monitors, or unrelated system config.
 ## Included apps
 
 - **CopyQ** — clipboard manager (`apt install copyq`); config in `configs/copyq/`, autostart in `configs/autostart/`. Do **not** ship clipboard history `.dat` files.
+
+## Scale
+
+After dconf apply, always run `scripts/adapt-to-scale.sh`. It must **not** change the user’s display scale or `text-scaling-factor` — only dock/panel/vitals pixel sizes so the rice fits any monitor.

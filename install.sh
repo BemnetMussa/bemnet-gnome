@@ -152,6 +152,13 @@ apply_dconf() {
   load_if_dir /org/gnome/pomodoro/preferences/ 20-pomodoro.ini
   load_if_dir /org/gnome/pomodoro/plugins/gnome/ 21-pomodoro-gnome.ini
   load_if_dir /org/gnome/pomodoro/plugins/sounds/ 22-pomodoro-sounds.ini
+
+  # Resize dock/panel pixels for this machine's scale — never overwrites display/text scale
+  if [[ -x "$ROOT/scripts/adapt-to-scale.sh" ]]; then
+    "$ROOT/scripts/adapt-to-scale.sh" || warn "Scale adaptation skipped"
+  elif [[ -f "$ROOT/scripts/adapt-to-scale.sh" ]]; then
+    bash "$ROOT/scripts/adapt-to-scale.sh" || warn "Scale adaptation skipped"
+  fi
 }
 
 enable_extensions() {
