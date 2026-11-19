@@ -60,6 +60,9 @@ chmod +x install.sh scripts/install-extensions.sh scripts/adapt-to-scale.sh
 - **MacOS Dock** — magnification dock with auto-hide on hover  
 - **X11 Gestures + Touchégg** — 3/4-finger trackpad gestures  
 - **Pop Shell** — optional tiling (off by default)  
+- **Auto Move Windows** — auto-assign apps to workspaces (Brave→1, Cursor→2, Obsidian→3)  
+- **Listening Ports** — top-bar dev monitor: see which apps are listening, open/copy/stop  
+- **Follow** — start/stop OpenHands Canvas on Tailscale, scan QR from your phone  
 - **CopyQ** — clipboard history (autostarts with the session)  
 - **Pomodoro** — focus timer in the top bar  
 - **Scale-adaptive sizing** — keeps *your* display/text scale; resizes dock/panel so it does not overlap or look cramped on another monitor  
@@ -99,6 +102,16 @@ bemnet-gnome/
 ├── configs/
 └── icons/WhiteSur-Panel/
 ```
+
+## Display scaling
+
+The setup targets a **3456×2160 (3.5K) laptop panel** running at a scaled-down resolution (1920×1080) with `text-scaling-factor=1.25` and `x11-randr-fractional-scaling` enabled.  Dock and panel pixel sizes adapt automatically via `scripts/adapt-to-scale.sh`.
+
+If you want sharper rendering on a high-DPI panel, try:
+- **Native res + 2× scale** — crispest text, biggest UI elements
+- **Native res + 1.5× fractional** — good balance (needs Xorg fractional scaling)
+
+The installer **never** changes your display scale or text-scaling-factor.
 
 ## Credits
 

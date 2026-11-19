@@ -17,6 +17,9 @@ ubuntu-appindicators@ubuntu.com | Ubuntu AppIndicators | preinstalled on Ubuntu
 Vitals@CoreCoding.com | Vitals | https://extensions.gnome.org/extension/1460/vitals/
 eth-cal@dagimg-dot | EthCal (Ethiopian calendar) | GitHub release: https://github.com/dagimg-dot/EthCal/releases
 pomodoro@arun.codito.in | Pomodoro | apt: gnome-shell-pomodoro (https://gnomepomodoro.org)
+auto-move-windows@gnome-shell-extensions.gcampax.github.com | Auto Move Windows | bundled with gnome-shell-extensions package
+dev-monitor@founder.os | Listening Ports | custom extension — shows listening ports in top bar (open/copy/stop)
+follow-me@voare | Follow | custom extension — start/stop OpenHands Canvas on Tailscale with QR for phone
 
 # Apps (not GNOME extensions) installed by install.sh:
 #   copyq + copyq-plugins — clipboard history (Ctrl+Shift+C to show)
