@@ -93,6 +93,48 @@ install_whitesur_icons() {
   gtk-update-icon-cache -f -t "$HOME/.local/share/icons/WhiteSur-Panel" 2>/dev/null || true
 }
 
+install_cursor() {
+  log "Installing Bibata-Modern-Classic cursor theme"
+  local dest="$HOME/.local/share/icons/Bibata-Modern-Classic"
+  if [[ ! -d "$dest" ]]; then
+    mkdir -p "$HOME/.local/share/icons"
+    local tarball="$CACHE/Bibata-Modern-Classic.tar.xz"
+    if ! curl -fsSL -o "$tarball" \
+      https://github.com/ful1e5/Bibata_Cursor/releases/latest/download/Bibata-Modern-Classic.tar.xz 2>/dev/null; then
+      curl -fsSL -o "$tarball" \
+        https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz
+    fi
+    tar -xf "$tarball" -C "$HOME/.local/share/icons/"
+  fi
+
+  # System-wide install if sudo is available (fixes Snaps, root apps, login screen, X11 root window)
+  if command -v sudo >/dev/null 2>&1; then
+    sudo cp -rn "$dest" /usr/share/icons/ 2>/dev/null || true
+    sudo update-alternatives --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/Bibata-Modern-Classic/cursor.theme 110 2>/dev/null || true
+    sudo update-alternatives --set x-cursor-theme /usr/share/icons/Bibata-Modern-Classic/cursor.theme 2>/dev/null || true
+  fi
+
+  # Fallback & compatibility links for legacy X11 & sandboxed apps
+  mkdir -p "$HOME/.icons/default"
+  cat << 'EOF' > "$HOME/.icons/default/index.theme"
+[Icon Theme]
+Name=Default
+Comment=Default Cursor Theme
+Inherits=Bibata-Modern-Classic
+EOF
+  ln -sf "$dest" "$HOME/.icons/Bibata-Modern-Classic"
+
+  # Snap sandbox fallback
+  for app in "$HOME/snap/"*; do
+    if [[ -d "$app/common" ]]; then
+      mkdir -p "$app/common/.icons/default" "$app/common/.local/share/icons"
+      cp -rn "$dest" "$app/common/.icons/" 2>/dev/null || true
+      cp -rn "$dest" "$app/common/.local/share/icons/" 2>/dev/null || true
+      cp -f "$HOME/.icons/default/index.theme" "$app/common/.icons/default/index.theme" 2>/dev/null || true
+    fi
+  done
+}
+
 install_extension_configs() {
   log "Installing Burn My Windows profile + Touchégg + CopyQ + autostart"
   mkdir -p "$HOME/.config/burn-my-windows/profiles"
@@ -111,6 +153,22 @@ install_extension_configs() {
 
   mkdir -p "$HOME/.config/autostart"
   cp -f "$ROOT/configs/autostart/copyq.desktop" "$HOME/.config/autostart/copyq.desktop"
+
+  # GTK 3 & GTK 4 theme configuration
+  mkdir -p "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
+  for conf in "$HOME/.config/gtk-3.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"; do
+    if [[ ! -f "$conf" ]]; then
+      cat << 'EOF' > "$conf"
+[Settings]
+gtk-theme-name=Orchis-Grey-Dark
+gtk-icon-theme-name=WhiteSur-Panel
+gtk-cursor-theme-name=Bibata-Modern-Classic
+gtk-cursor-theme-size=32
+gtk-font-name=Adwaita Sans 11
+gtk-application-prefer-dark-theme=1
+EOF
+    fi
+  done
 }
 
 apply_dconf() {
@@ -237,6 +295,7 @@ main() {
       install_apt_deps
       install_orchis
       install_whitesur_icons
+      install_cursor
       install_extension_configs
       # Extensions before final dconf so schemas exist when possible
       if [[ -x "$ROOT/scripts/install-extensions.sh" ]]; then
@@ -250,8 +309,10 @@ main() {
     themes)
       install_orchis
       install_whitesur_icons
+      install_cursor
       ;;
     settings)
+      install_cursor
       install_extension_configs
       apply_dconf
       enable_extensions
