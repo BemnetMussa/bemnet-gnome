@@ -15,20 +15,22 @@ Ubuntu GNOME desktop setup: Orchis Grey Dark theme, WhiteSur icons, Bibata Moder
 
 ## Visual Showcase
 
-### Frosted Top Panel
-Live system vitals (CPU, RAM, temps), Ethiopian calendar (Amharic), clock, and media controls integrated into a frosted translucent bar.
+![Feature Breakdown](screenshots/features-overview.png)
+
+### 1. Frosted Glass Top Panel
+Live system vitals (CPU, RAM, swap, temps), Ethiopian calendar (`EthCal` in Amharic), 12-hour clock, and media controls integrated into a frosted translucent bar with `24px` corner radius.
 
 ![Top Panel](screenshots/top-bar.png)
 
-### Fluid macOS-Style Dock
-Auto-hiding bottom dock with smooth icon magnification curve (`1.48` scale, `155` falloff, `160ms` duration) and rounded border radius dynamically matched to the top panel.
+### 2. Fluid macOS-Style Floating Dock
+Auto-hiding bottom dock with a buttery icon magnification curve (`1.48` scale, `155` falloff, `160ms` duration) and rounded `24px` border radius dynamically synced to the top panel.
 
 <div align="center">
   <img src="screenshots/dock.png" alt="MacOS Dock" width="850">
 </div>
 
-### Bibata Modern Classic Cursor
-Rounded, modern cursor theme automatically scaled and configured across GNOME, GTK 3, GTK 4, legacy X11, and sandboxed Snap/Flatpak apps.
+### 3. Bibata Modern Classic Cursor
+Rounded, modern cursor theme automatically scaled and configured across GNOME, GTK 3, GTK 4, legacy X11 root window, and sandboxed Snap/Flatpak apps (Brave, Spotify, Slack).
 
 <div align="center">
   <img src="screenshots/cursor-preview.png" alt="Bibata Cursor Preview" width="850">
