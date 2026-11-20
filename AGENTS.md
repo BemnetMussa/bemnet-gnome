@@ -84,7 +84,7 @@ Editor/terminal themes, wallpapers, monitors, or unrelated system config.
 
 ## Included stack (expect these after install)
 
-- **Orchis-Grey-Dark** + **WhiteSur-Panel** icons  
+- **Orchis-Grey-Dark** + **WhiteSur-Panel** icons + **Bibata-Modern-Classic** cursor  
 - **Just Perfection**, **Blur my Shell**, **Burn My Windows**, **Magic Lamp**  
 - **MacOS Dock** (auto-hide)  
 - **Vitals** — CPU/RAM/GPU/network/temps  
@@ -93,4 +93,4 @@ Editor/terminal themes, wallpapers, monitors, or unrelated system config.
 - **CopyQ** — clipboard history + autostart (never copy `.dat` history files)  
 - **X11 Gestures + Touchégg**, **Pop Shell** (tiling off by default)  
 - Workspace shortcuts: `Ctrl+Alt+A/D` (`dconf/03-keybindings.ini`)  
-- **Scale-adaptive** dock/panel sizing via `scripts/adapt-to-scale.sh`
+- **Scale-adaptive** dock/panel and cursor sizing via `scripts/adapt-to-scale.sh`

@@ -44,4 +44,4 @@ Needs network + sudo. If sudo fails, give them the exact command to paste in a t
 2. Login gear → **Ubuntu on Xorg** (gestures need X11)  
 3. Log back in  
 
-Confirm briefly: Orchis + WhiteSur, blur top bar, Vitals, EthCal, auto-hide dock, CopyQ, Pomodoro, workspace shortcuts Ctrl+Alt+A/D, scale-adapted sizes.
+Confirm briefly: Orchis + WhiteSur + Bibata cursor, blur top bar, Vitals, EthCal, auto-hide dock, CopyQ, Pomodoro, workspace shortcuts Ctrl+Alt+A/D, scale-adapted sizes.
